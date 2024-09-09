@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "581103247067",
+    "project_id": "rentality-80fd6",
+    "storage_bucket": "rentality-80fd6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581103247067:android:e1691a557d120510f0b6fe",
+        "android_client_info": {
+          "package_name": "com.eigen.rentality"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAehCSvV6m-RR5nvuCZpd-AGnzVngYgPI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
