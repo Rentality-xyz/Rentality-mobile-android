@@ -1,11 +1,13 @@
 package com.eigen.rentality
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
+import android.net.http.SslError
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
@@ -17,6 +19,7 @@ import android.webkit.ConsoleMessage
 import android.webkit.CookieManager
 import android.webkit.CookieSyncManager
 import android.webkit.JavascriptInterface
+import android.webkit.SslErrorHandler
 import android.webkit.URLUtil
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
@@ -26,6 +29,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 const val RENTALITY_URL = "https://app.rentality.xyz"
 
@@ -37,7 +41,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val webView = findViewById<WebView>(R.id.webView)
+        val webViewContainer = findViewById<View>(R.id.webViewContainer)
         val loader = findViewById<View>(R.id.loader)
+        val swipeRefreshContainer = findViewById<SwipeRefreshLayout>(R.id.swipeContainer)
+
+        swipeRefreshContainer.setOnRefreshListener {
+            webView.reload()
+            swipeRefreshContainer.isRefreshing = false
+        }
 
         webView.apply {
             val instance: CookieManager = CookieManager.getInstance()
@@ -57,6 +68,8 @@ class MainActivity : AppCompatActivity() {
             setLayerType(View.LAYER_TYPE_HARDWARE, null)
             settings.cacheMode = WebSettings.LOAD_DEFAULT
             settings.offscreenPreRaster = true
+            settings.setSupportMultipleWindows(false)
+
             webView.addJavascriptInterface(object {
                 @JavascriptInterface
                 fun downloadFile(url: String, fileName: String) {
@@ -76,11 +89,12 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onPageFinished(view: WebView?, url: String?) {
                     super.onPageFinished(view, url)
+                    println("on page finished $url")
                     view?.loadUrl("""
                            javascript:(function() {
                                 function replaceIframes() {
                                     var iframes = document.getElementsByTagName('iframe');
-                                    var iframesArray = Array.from(iframes); 
+                                    var iframesArray = Array.from(iframes);
                                     for (var i = 0; i < iframesArray.length; i++) {
                                         var iframe = iframesArray[i];
                                         var src = iframe.src;
@@ -96,8 +110,8 @@ class MainActivity : AppCompatActivity() {
                                             wrapper.style.flexDirection = 'column';
                                             wrapper.style.justifyContent = 'center';
                                             wrapper.style.alignItems = 'center';
-                                            wrapper.style.border = iframe.style.border;  
-                                            
+                                            wrapper.style.border = iframe.style.border;
+
                                             var button = document.createElement('button');
                                             button.innerHTML = 'Download PDF';
                                             button.style.padding = '10px 20px';
@@ -114,26 +128,26 @@ class MainActivity : AppCompatActivity() {
                                                     window.Android.downloadFile(src, src.substring(src.lastIndexOf('/') + 1));
                                                 };
                                             })(src);
-                    
+
                                             wrapper.appendChild(button);
                                             iframe.parentNode.replaceChild(wrapper, iframe);
                                         }
                                     }
                                 }
-                    
+
                                 replaceIframes();
-                    
+
                                 var observer = new MutationObserver(function(mutations) {
                                     mutations.forEach(function(mutation) {
                                         replaceIframes();
                                     });
                                 });
-                    
+
                                 observer.observe(document.body, { childList: true, subtree: true });
-                    
+
                     })();
                     """.trimIndent())
-                    webView.visibility = View.VISIBLE
+                    webViewContainer.visibility = View.VISIBLE
                     loader.visibility = View.GONE
                 }
 
@@ -143,6 +157,7 @@ class MainActivity : AppCompatActivity() {
                 ): Boolean {
                     val url = request?.url.toString()
                     println(url)
+                    println("shouldOverrideUrlLoading $url")
 
                     if (url.startsWith("http://") || url.startsWith("https://")) {
                         return false
