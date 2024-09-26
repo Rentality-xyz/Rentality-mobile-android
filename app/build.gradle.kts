@@ -11,15 +11,15 @@ android {
         applicationId = "com.rentality"
         minSdk = 26
         targetSdk = 34
-        versionCode = 5
-        versionName = "1.6"
+        versionCode = 1
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

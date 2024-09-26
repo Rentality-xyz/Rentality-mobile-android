@@ -32,7 +32,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlin.math.roundToLong
 
 const val RENTALITY_URL = "https://app.rentality.xyz"
-//const val RENTALITY_URL = "https://demotest.rentality.xyz"
 
 class MainActivity : AppCompatActivity() {
 
