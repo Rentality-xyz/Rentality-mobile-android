@@ -8,7 +8,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.eigen.rentality"
+        applicationId = "com.rentality"
         minSdk = 26
         targetSdk = 34
         versionCode = 5

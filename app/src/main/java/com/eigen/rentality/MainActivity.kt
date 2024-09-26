@@ -17,7 +17,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.ConsoleMessage
 import android.webkit.CookieManager
-import android.webkit.CookieSyncManager
 import android.webkit.JavascriptInterface
 import android.webkit.SslErrorHandler
 import android.webkit.URLUtil
@@ -30,8 +29,10 @@ import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import kotlin.math.roundToLong
 
 const val RENTALITY_URL = "https://app.rentality.xyz"
+//const val RENTALITY_URL = "https://demotest.rentality.xyz"
 
 class MainActivity : AppCompatActivity() {
 
