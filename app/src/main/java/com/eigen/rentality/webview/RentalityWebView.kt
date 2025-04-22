@@ -36,7 +36,7 @@ class RentalityWebView(
             cacheMode = WebSettings.LOAD_DEFAULT
             offscreenPreRaster = true
             setSupportMultipleWindows(false)
-            userAgentString = System.getProperty("http.agent")!!
+            userAgentString = System.getProperty("http.agent")!! + " RentalityApp"
         }
         setLayerType(View.LAYER_TYPE_HARDWARE, null)
         CookieManager.getInstance().apply {

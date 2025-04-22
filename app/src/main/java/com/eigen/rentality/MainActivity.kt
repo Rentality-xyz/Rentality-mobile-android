@@ -25,7 +25,7 @@ import com.eigen.rentality.webview.RentalityWebView
 import com.eigen.rentality.webview.RentalityWebViewClient
 import java.io.File
 
-const val RENTALITY_URL = "https://app.rentality.xyz/"
+const val RENTALITY_URL = "https://app.rentality.io/"
 
 class MainActivity : AppCompatActivity() {
 
