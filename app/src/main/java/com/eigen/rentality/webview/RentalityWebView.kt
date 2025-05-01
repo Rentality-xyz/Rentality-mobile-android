@@ -17,11 +17,11 @@ import android.widget.Toast
 @SuppressLint("SetJavaScriptEnabled")
 class RentalityWebView(
     context: Context,
-    attrs: AttributeSet
-) : WebView(context,attrs) {
+) : WebView(context) {
 
     init {
         settings.apply {
+            layoutParams = LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT)
             javaScriptEnabled = true
             allowFileAccess = true
             databaseEnabled = true

@@ -3,17 +3,30 @@ package com.eigen.rentality.webview
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 
 class RentalityWebViewClient(
-    private val onPageFinished: () -> Unit
+    private val onPageFinished: () -> Unit,
+    private val onError: () -> Unit,
 ) : WebViewClient() {
 
     override fun onPageFinished(view: WebView?, url: String?) {
         super.onPageFinished(view, url)
         onPageFinished()
+    }
+
+    override fun onReceivedError(
+        view: WebView,
+        request: WebResourceRequest,
+        error: WebResourceError
+    ) {
+        super.onReceivedError(view, request, error)
+        if (request.isForMainFrame) {
+            onError()
+        }
     }
 
     override fun shouldOverrideUrlLoading(
