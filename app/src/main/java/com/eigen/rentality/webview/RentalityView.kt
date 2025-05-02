@@ -3,6 +3,7 @@ package com.eigen.rentality.webview
 import android.Manifest
 import android.content.Loader
 import android.os.Build.VERSION.SDK_INT
+import android.view.ViewGroup
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -98,6 +99,9 @@ private fun AndroidRentalityWebView(
                 setOnRefreshListener {
                     webView.reload()
                     isRefreshing = false
+                }
+                webView.parent?.let { parent ->
+                    (parent as? ViewGroup)?.removeView(webView)
                 }
                 addView(webView)
             }
