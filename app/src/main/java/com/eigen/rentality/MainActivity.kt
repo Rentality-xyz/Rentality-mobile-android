@@ -6,9 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.eigen.rentality.webview.RentalityView
 
 class MainActivity : ComponentActivity() {
@@ -17,7 +16,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Box(
-                modifier = Modifier.padding(top = 24.dp).fillMaxSize()
+                modifier = Modifier
+                    .statusBarsPadding()
+                    .fillMaxSize()
             ) {
                 RentalityView()
             }
