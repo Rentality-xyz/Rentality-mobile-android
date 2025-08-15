@@ -1,9 +1,11 @@
 package com.eigen.rentality.webview
 
 import android.Manifest
+import android.content.Context.MODE_PRIVATE
 import android.content.Loader
 import android.os.Build.VERSION.SDK_INT
 import android.view.ViewGroup
+import android.webkit.JavascriptInterface
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -37,9 +39,11 @@ import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
 import coil.size.Size
+import com.eigen.rentality.PUSH_TOKEN
 import com.eigen.rentality.R
 
 const val RENTALITY_URL = "https://app.rentality.io/"
+//const val RENTALITY_URL = "http://192.168.0.103:3000/platform_init_error"
 
 @Composable
 fun RentalityView() {
@@ -68,6 +72,12 @@ fun RentalityView() {
                     onPermissionResult.launch(Manifest.permission.CAMERA)
                 }
             )
+            addJavascriptInterface(object {
+                @JavascriptInterface
+                fun getPushToken(): String {
+                    return context.getSharedPreferences(PUSH_TOKEN, 0).getString(PUSH_TOKEN,"") ?: ""
+                }
+            }, "nativeBridge")
             loadUrl(RENTALITY_URL)
         }
     }
