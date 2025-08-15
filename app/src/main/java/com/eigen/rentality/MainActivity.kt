@@ -21,8 +21,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        println("tokenecrctvytrtrbt222")
-        println(getSharedPreferences(PUSH_TOKEN,0).getString(PUSH_TOKEN,""))
         setContent {
 
             val requestPermissionLauncher = rememberLauncherForActivityResult(
