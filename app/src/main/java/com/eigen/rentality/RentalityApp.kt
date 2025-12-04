@@ -8,7 +8,5 @@ class RentalityApp: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        AppsFlyerLib.getInstance().init("SyNJWwbnshhwGcxYgPzYLH", null, this)
-        AppsFlyerLib.getInstance().start(this)
     }
 }
