@@ -2,6 +2,7 @@ package com.eigen.rentality.webview
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
@@ -33,25 +34,32 @@ class RentalityWebViewClient(
         view: WebView?,
         request: WebResourceRequest?
     ): Boolean {
-        val url = request?.url.toString()
-        println("shouldOverrideUrlLoading: $url")
+        val url = request?.url?.toString() ?: return false
+        Log.d("WebView", "shouldOverrideUrlLoading: $url")
 
-        if (url.startsWith("http://") || url.startsWith("https://")) {
-            return false
-        } else {
+        // 1️⃣ Wallet / deep links — В ЗОВНІШНІЙ APP
+        if (
+            url.startsWith("intent:") ||
+            url.startsWith("market://") ||
+            url.startsWith("metamask://") ||
+            url.startsWith("wc:") ||
+            url.startsWith("https://metamask.app.link")
+        ) {
             try {
-                val intent: Intent
-                if (url.startsWith("intent:")) {
-                    intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME)
-                    intent.addCategory(Intent.CATEGORY_BROWSABLE)
+                val intent = if (url.startsWith("intent:")) {
+                    Intent.parseUri(url, Intent.URI_INTENT_SCHEME)
                 } else {
-                    intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    Intent(Intent.ACTION_VIEW, Uri.parse(url))
                 }
-                view!!.context.startActivity(intent)
-
-            } catch (_: Exception) {
+                intent.addCategory(Intent.CATEGORY_BROWSABLE)
+                view?.context?.startActivity(intent)
+            } catch (e: Exception) {
+                Log.e("WebView", "Failed to open external intent", e)
             }
             return true
         }
+
+        // 2️⃣ Звичайні http(s) — залишаємо у WebView
+        return false
     }
 }
