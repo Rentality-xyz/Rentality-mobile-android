@@ -45,7 +45,8 @@ import com.eigen.rentality.R
 //const val RENTALITY_URL = "https://app.rentality.io/"
 const val RENTALITY_URL = "https://demo.rentality.io/"
 //const val RENTALITY_URL = "https://demotest.rentality.io/"
-//const val RENTALITY_URL = "http://192.168.0.103:3000/platform_init_error"
+//const val RENTALITY_URL = "http://localhost:3000/"
+//const val RENTALITY_URL = "https://zora.co/"
 
 @Composable
 fun RentalityView() {
