@@ -42,8 +42,8 @@ import coil.size.Size
 import com.eigen.rentality.PUSH_TOKEN
 import com.eigen.rentality.R
 
-//const val RENTALITY_URL = "https://app.rentality.io/"
-const val RENTALITY_URL = "https://demo.rentality.io/"
+const val RENTALITY_URL = "https://app.rentality.io/"
+//const val RENTALITY_URL = "https://demo.rentality.io/"
 //const val RENTALITY_URL = "https://demotest.rentality.io/"
 //const val RENTALITY_URL = "http://localhost:3000/"
 //const val RENTALITY_URL = "https://zora.co/"

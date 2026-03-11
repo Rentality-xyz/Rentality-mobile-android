@@ -13,8 +13,8 @@ android {
         applicationId = "xyz.rentality.rentality"
         minSdk = 24
         targetSdk = 36
-        versionCode = 5
-        versionName = "1.0.10"
+        versionCode = 12
+        versionName = "1.12.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
