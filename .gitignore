@@ -7,6 +7,8 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+/.idea/.name
+/.idea/deviceManager.xml
 .DS_Store
 /build
 /captures
@@ -15,3 +17,5 @@
 local.properties
 rentalitypass
 /app/google-services.json
+/app/.idea
+/app/release
